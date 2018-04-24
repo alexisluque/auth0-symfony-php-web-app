@@ -5,7 +5,7 @@
         Welcome, {{ app.user.username }}!<br/>
         {{ dump(app.user) }}
         <a href="{{ url('secured_index') }}">Protected route</a>
-        <a href="{{ logout_url("secured_area") }}">
+        <a href="{{ logoutUrl }}">
             <button>Logout</button>
         </a>
     {% else %}

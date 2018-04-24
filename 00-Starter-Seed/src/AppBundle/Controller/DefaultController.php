@@ -12,8 +12,17 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        $returnTo = sprintf('%s://%s:%s/auth0/logout',
+            $this->container->get('router')->getContext()->getScheme(),
+            $this->container->get('router')->getContext()->getHost(),
+            $this->container->get('router')->getContext()->getHttpPort());
+        $logoutUrl = sprintf(
+            'https://%s/v2/logout?client_id=%s&returnTo=%s',
+            getenv('AUTH0_DOMAIN'),
+            getenv('AUTH0_CLIENT_ID'),
+            $returnTo);
+        return $this->render('default/index.html.twig', array(
+            'logoutUrl' => $logoutUrl
+        ));
     }
 }
