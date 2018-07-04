@@ -12,10 +12,12 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $returnTo = sprintf('%s://%s:%s/auth0/logout',
+        $port = $this->container->get('router')->getContext()->getHttpPort();
+        $port == "" ? : $port = ':'.$port;
+        $returnTo = sprintf('%s://%s%s/auth0/logout',
             $this->container->get('router')->getContext()->getScheme(),
             $this->container->get('router')->getContext()->getHost(),
-            $this->container->get('router')->getContext()->getHttpPort());
+            $port);
         $logoutUrl = sprintf(
             'https://%s/v2/logout?client_id=%s&returnTo=%s',
             getenv('AUTH0_DOMAIN'),
