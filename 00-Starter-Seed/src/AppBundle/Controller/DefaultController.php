@@ -13,7 +13,9 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $port = $this->container->get('router')->getContext()->getHttpPort();
-        $port == "" ? : $port = ':'.$port;
+        if (!empty($port)) {
+            $port = ':'.$port;
+        }
         $returnTo = sprintf('%s://%s%s/auth0/logout',
             $this->container->get('router')->getContext()->getScheme(),
             $this->container->get('router')->getContext()->getHost(),
