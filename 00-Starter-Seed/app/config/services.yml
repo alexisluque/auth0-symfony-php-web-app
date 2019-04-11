@@ -29,6 +29,9 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    logoutlistener:
+        class: AppBundle\Listener\LogoutListener
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

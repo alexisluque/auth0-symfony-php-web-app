@@ -27,6 +27,7 @@ security:
             logout:
                 path: /auth0/logout
                 target: /
+                success_handler: logoutlistener
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
